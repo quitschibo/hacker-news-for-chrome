@@ -29,13 +29,12 @@ function UpdateIfReady(force) {
 }
 
 function UpdateFeed() {
-  //$.ajax({type:'GET', dataType:'xml', url: 'https://news.ycombinator.com/rss', timeout:5000, success:onRssSuccess, error:onRssError, async: false});
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://news.ycombinator.com/rss", true);
 	xhr.onreadystatechange = function() {
 	  if (xhr.readyState == 4) {
-	    // innerText does not let the attacker inject HTML elements.
-	    onRssSuccess(xhr.responseText);
+	    // innerText does not let the attacker inject HTML elements.;
+	    onRssSuccess(parseXml(xhr.responseText));
 	  }
 	}
 	xhr.send();
