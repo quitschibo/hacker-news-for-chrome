@@ -67,8 +67,18 @@ function DebugMessage(message) {
 }
 
 function ShowLinkNotification(link) {
-  var notification = webkitNotifications.createHTMLNotification("notification.html");
-  notification.show();
+	var notification = webkitNotifications.createNotification("icon48.gif", "Hacker News Top Story", link.Title);
+
+	// notification onClick function
+	notification.addEventListener("click", function () {
+		window.open(link.Link);
+		notification.close();
+	});
+
+	// set notification timeout
+	setTimeout(function() { notification.close(); }, 5000);
+	
+	notification.show();
 }
 
 function onRssError(xhr, type, error) {
